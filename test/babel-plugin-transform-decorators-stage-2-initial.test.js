@@ -20,8 +20,7 @@ describe('apply decorators', function () {
         var source = fs.readFileSync(fullPath, 'utf8');
         result = babel.transform(source, {
           plugins: [
-            babelPluginTransformDecoratorsStage2Initial,
-            'transform-es2015-classes'
+            babelPluginTransformDecoratorsStage2Initial
           ]
         });
       });
