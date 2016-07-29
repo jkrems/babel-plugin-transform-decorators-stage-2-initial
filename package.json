@@ -24,9 +24,15 @@
       ]
     }
   },
-  "dependencies": {},
+  "dependencies": {
+    "babel-helper-explode-class": "^6.8.0",
+    "babel-template": "^6.9.0"
+  },
   "devDependencies": {
     "assertive": "^2.0.0",
+    "babel-core": "^6.11.4",
+    "babel-plugin-syntax-decorators": "^6.8.0",
+    "babel-plugin-transform-es2015-classes": "^6.9.0",
     "eslint": "^2.0.0",
     "eslint-config-groupon-es5": "^3.0.0",
     "eslint-plugin-import": "^1.6.1",
