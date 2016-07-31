@@ -37,14 +37,4 @@ describe('apply decorators', function () {
       });
     });
   });
-
-  describe('getter/setter both decorated', function () {
-    it('triggers an error', function () {
-      var err = assert.throws(function () {
-        toES6Code('class X { @d get a() {} @d set a(v) {} }');
-      });
-      assert.hasType('Contains code snippet', String, err.codeFrame);
-      assert.include('Cannot decorate both getter and setter for the same property', err.message);
-    });
-  });
 });

@@ -11,6 +11,8 @@ class X {
   @d a() {}
 
   @d set a(n) {}
+  b() {} // should not reset
+  static a() {} // should not reset
   get a() {}
 
   a() {} // reset
