@@ -1,0 +1,17 @@
+const m = Symbol('m');
+
+function d(element) {
+  assert.equal(element.key, m);
+  assert.hasType(Function, element.descriptor.get);
+  return element;
+}
+
+// To force a "complex" expression in the bracket
+function id(x) {
+  return x;
+}
+
+class X {
+  // Using a symbol because syntax-decorators can't deal with symbol methods
+  @d get [id(m)]() {}
+}
