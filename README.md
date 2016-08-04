@@ -2,6 +2,8 @@
 
 **Warning:** This transform currently tries to optimize for matching the spec as closely as possible. It is not fast or produces pretty output.
 
+**Warning:** The proposal is still very much in flux and contains some ambiguity. The implementation in this repo is just one person's interpretation.
+
 Babel transform for the [stage 2 decorators proposal](http://tc39.github.io/proposal-decorators/#sec-decorate-element).
 
 ```
