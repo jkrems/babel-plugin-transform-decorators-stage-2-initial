@@ -4,6 +4,7 @@ var vm = require('vm');
 
 var assert = require('assertive');
 var babel = require('babel-core');
+require('reflect-metadata'); /* global Reflect */
 
 var babelPluginTransformDecoratorsStage2Initial = require('../');
 
@@ -32,7 +33,8 @@ describe('method-decorators', function () {
       it('runs successfully', function () {
         vm.runInNewContext('"use strict";\n' + es6Code, {
           assert: assert,
-          console: console
+          console: console,
+          Reflect: Reflect
         }, { filename: fullPath });
       });
     });
