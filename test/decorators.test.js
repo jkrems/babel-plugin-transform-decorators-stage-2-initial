@@ -16,10 +16,14 @@ var HAS_NATIVE_REFLECT =
   Reflect.construct.toString().indexOf('{ [native code] }') !== -1;
 
 function toES6Code(source, useNativeClasses) {
+  var requiresTransform = source.match(/@transform ([\w-]+)/);
+  var additionalTransform = requiresTransform && requiresTransform[1];
   return babel.transform(source, {
-    plugins: [
-      babelPluginTransformDecoratorsStage2Initial
-    ].concat(useNativeClasses ? [] : ['transform-es2015-classes'])
+    plugins: [].concat(
+      additionalTransform ? ['transform-' + additionalTransform] : [],
+      babelPluginTransformDecoratorsStage2Initial,
+      useNativeClasses ? [] : ['transform-es2015-classes']
+    )
   }).code;
 }
 

@@ -4,6 +4,8 @@
 
 **Warning:** The proposal is still very much in flux and contains some ambiguity. The implementation in this repo is just one person's interpretation.
 
+**Warning:** If you're using the [`object-rest-spread` transform](http://babeljs.io/docs/plugins/transform-object-rest-spread/), make sure it runs before the decorator transform. Otherwise it will not work correctly.
+
 Babel transform for the [stage 2 decorators proposal](http://tc39.github.io/proposal-decorators/#sec-decorate-element).
 
 ```
