@@ -4,6 +4,8 @@ var vm = require('vm');
 
 var assert = require('assertive');
 var babel = require('babel-core');
+require('core-js/library/es6/reflect');
+var Reflect = require('core-js/library/es7/reflect');
 
 var babelPluginTransformDecoratorsStage2Initial = require('../');
 
@@ -33,7 +35,8 @@ describe('class-decorators', function () {
       it('runs successfully', function () {
         vm.runInNewContext('"use strict";\n' + es6Code, {
           assert: assert,
-          console: console
+          console: console,
+          Reflect: Reflect
         }, { filename: fullPath });
       });
     });
