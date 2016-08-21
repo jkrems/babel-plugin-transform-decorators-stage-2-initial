@@ -54,5 +54,8 @@ assert.deepEqual(['Stop using Derived', 'Seriously, stop!', 'Stop using Base'], 
 assert.equal('Preserves static methods', 7, Derived.s());
 assert.equal('Preserves static method inheritance', 'base7', Derived.staticBase());
 
+assert.equal('The .name stays the same', 'Base', Base.name);
+assert.equal('The .name stays the same', 'Derived', Derived.name);
+
 assert.throws('Calling the wrapper as a function should throw', () => Base());
 assert.throws('Calling the wrapper as a function should throw', () => Derived());
