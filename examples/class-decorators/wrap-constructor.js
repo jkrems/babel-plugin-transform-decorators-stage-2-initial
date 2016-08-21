@@ -5,13 +5,10 @@ function log(msg) {
 
 function deprecate(message) {
   return desc => {
-    let FinalCtor = null;
-    const OriginalCtor = desc.constructor;
-    desc.finisher = klass => { FinalCtor = klass; };
+    const PrevCtor = desc.constructor;
     desc.constructor = function Deprecated() {
       log(message);
-      const self = Reflect.construct(OriginalCtor, arguments, FinalCtor);
-      return self;
+      return Reflect.construct(PrevCtor, arguments, this.constructor);
     };
     return desc;
   };
@@ -22,6 +19,8 @@ class Base {
   constructor(arg) {
     this.base = arg;
   }
+
+  static staticBase() { return 'base7'; }
 }
 
 @deprecate('Stop using Derived')
@@ -31,18 +30,29 @@ class Derived extends Base {
     super(baseArg);
     this.derived = derivedArg;
   }
+
+  static s() { return 7; }
+
+  f() { return 13; }
 }
 
 logs = [];
 const baseInst = new Base(42);
 assert.equal(42, baseInst.base);
+assert.expect('baseInst is a Base', baseInst instanceof Base);
 assert.deepEqual(['Stop using Base'], logs);
 
 logs = [];
 const inst = new Derived('x', 'y');
 assert.equal('x', inst.derived);
 assert.equal('y', inst.base);
+assert.equal(13, inst.f());
+assert.expect('inst is a Base', inst instanceof Base);
+assert.expect('inst is a Derived', inst instanceof Derived);
 assert.deepEqual(['Stop using Derived', 'Seriously, stop!', 'Stop using Base'], logs);
+
+assert.equal('Preserves static methods', 7, Derived.s());
+assert.equal('Preserves static method inheritance', 'base7', Derived.staticBase());
 
 assert.throws('Calling the wrapper as a function should throw', () => Base());
 assert.throws('Calling the wrapper as a function should throw', () => Derived());

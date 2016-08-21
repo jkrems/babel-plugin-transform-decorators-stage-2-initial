@@ -12,5 +12,5 @@ npm install --save-dev babel-plugin-transform-decorators-stage-2-initial
 
 ### Known Gaps
 
-Class decorators will generally not work without also transforming the class declaration itself, e.g. with [`transform-es2015-classes`](https://www.npmjs.com/package/babel-plugin-transform-es2015-classes).
+This transform will generally not work without also transforming the class declaration itself, e.g. with [`transform-es2015-classes`](https://www.npmjs.com/package/babel-plugin-transform-es2015-classes).
 It *might* work when native `Reflect.construct` is used (e.g. node 6+) instead of a polyfill.
