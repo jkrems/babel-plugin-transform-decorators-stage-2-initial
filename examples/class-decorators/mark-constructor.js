@@ -1,15 +1,13 @@
-var meta = new WeakMap();
-
-function id(e) { return e; }
+var meta = new Map();
 
 function mark(klass) {
-  meta.set(klass.constructor, 'marked');
+  klass.finisher = ctor => {
+    meta.set(ctor, 'marked');
+  };
   return klass;
 }
 
 @mark class X { g() { return 42; } }
-
-class Y { @id f() {} }
 
 assert.equal('marked', meta.get(X));
 assert.equal(42, new X().g());

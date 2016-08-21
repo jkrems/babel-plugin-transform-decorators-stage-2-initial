@@ -4,11 +4,12 @@ var vm = require('vm');
 
 var assert = require('assertive');
 var babel = require('babel-core');
-require('reflect-metadata'); /* global Reflect */
+require('core-js/library/es6/reflect');
+var Reflect = require('core-js/library/es7/reflect');
 
 var babelPluginTransformDecoratorsStage2Initial = require('../');
 
-var TEST_DIR = __dirname + '/language/method-decorators';
+var TEST_DIR = __dirname + '/../examples/method-decorators';
 var TEST_CASES = fs.readdirSync(TEST_DIR);
 
 function toES6Code(source) {
@@ -23,7 +24,7 @@ describe('method-decorators', function () {
   TEST_CASES.forEach(function (filename) {
     var fullPath = TEST_DIR + '/' + filename;
 
-    describe(filename, function () {
+    describe(filename.replace(/\.js$/, ''), function () {
       var es6Code;
       before('compile', function () {
         var source = fs.readFileSync(fullPath, 'utf8');
